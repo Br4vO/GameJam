@@ -3,9 +3,12 @@ using System.Collections;
 
 public class DankSpawn : MonoBehaviour {
 
+	public static DankSpawn spawn;
 	private GameObject[] dankSpawnpoints;
 	public GameObject[] dankObjects;
 	public GameObject[] dankRandomObjects;
+	public GameObject player;
+
 	bool[] dankAvailableSpawnpoints = new bool[17];
 	// Use this for initialization
 	void Start () {
@@ -17,12 +20,12 @@ public class DankSpawn : MonoBehaviour {
 
 		dankPrioritySpawn();
 		dankRandomSpawn();
+		spawnPlayer();
 	}
 
 	void dankRandomSpawn()
 	{
 		int dankRandom = Random.Range(0, dankSpawnpoints.Length);
-		int temp = 0;
 		for(int i = 0; i < dankRandomObjects.Length; i++)
 		{
 			if(dankAvailableSpawnpoints[dankRandom] == true)
@@ -54,7 +57,6 @@ public class DankSpawn : MonoBehaviour {
 	{
 		Debug.Log(dankRandomObjects.Length);
 		int dankRandom = Random.Range(0, dankSpawnpoints.Length);
-		int temp = 0;
 		for(int i = 0; i < dankObjects.Length; i++)
 		{
 			if(dankAvailableSpawnpoints[dankRandom] == true)
@@ -81,9 +83,10 @@ public class DankSpawn : MonoBehaviour {
 			}
 		}
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	void spawnPlayer()
+	{
+		Instantiate(player);
+		player.transform.position = new Vector3(0, 7, 9);
 	}
 }
